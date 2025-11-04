@@ -56,12 +56,18 @@ if(endingCity < 1) or (endingCity > citiesServed):
 ### FUNCTIONS
 #Generate Matrix from inputs
 def matrixGen(N,S,T):
+    #Make Matrix
     TheMatrix = []
     for i in range(0,N):
         NewMatrix = []
         for b in range(0,N):
             NewMatrix.append(PriceChooseFrom[random.randint(0,5)])
         TheMatrix.append(NewMatrix)
+
+    #Add 0s
+    for i in range(0,N):
+        TheMatrix[i][i] = 0
+    #Return
     return(TheMatrix)
 #Matrix print Function
 def matrixPrint(matrix):
@@ -86,7 +92,7 @@ def findLowestLisOfLis(themainlist):
                 least=themainlist[i+1]
     return(least)
 #Matrix Add Up Function
-# DO NOT USE, WAS MADE WHEN I DID NOT UNDERSTADN THE PROJECT CORRECTLY!
+# DO NOT USE BELOW, WAS MADE WHEN I DID NOT UNDERSTADN THE PROJECT CORRECTLY!
 def matrixFindRowValue(matrix,a,d):
     #print(matrix)
     stored_paths = []
@@ -123,12 +129,15 @@ def matrixOneStop(matrix,a,d):
     listofpossibleprices = []
     for i in range(len(matrix)):
         listofpossibleprices.append(matrix[i][a])
-    print(listofpossibleprices)
-    return(findLowestLisOfLis(listofpossibleprices))
+    lowest = findLowestLisOfLis(listofpossibleprices)
+    print("   Stopover in City",matrix[i].index(lowest))
+    print("    You pay",findLowestLisOfLis(listofpossibleprices),"to get from city",a, "to city",listofpossibleprices.index(lowest))
+    print("    plus",endvalue,"to get from city",listofpossibleprices.index(lowest),"to city",d)
+    return(endvalue+findLowestLisOfLis(listofpossibleprices))
 
 
 ### MAIN
 mymatrix = matrixGen(citiesServed, startingCity, endingCity)
 print(matrixPrint(mymatrix))
 print("The airfare for a nonstop oneway flight from city",startingCity,"to city",endingCity,"is:",matrixNonStop(mymatrix,startingCity,endingCity))
-print("test ones stop:",matrixOneStop(mymatrix,2,2))
+print("The cheapest airfare for a one-stop flight from city",startingCity, "city",endingCity, "is:", matrixOneStop(mymatrix,2,2))
