@@ -73,17 +73,10 @@ def matrixPrint(matrix):
             print("a" + str(i), end=" ")
     print("\n", end="")
     for i in range(len(matrix)):
+        print("d" + str(i) + " ", end="")
         for b in range(len(matrix)):
             print(matrix[b][i],end=",")
         print("\n")
-
-        '''
-        line = str(matrix.index(items))
-        print("d" + line, end=" ")
-        for itemstwo in items:
-            print(str(itemstwo), end=" ")
-        print("\n", end="")
-        '''
 #Find Lowest of Values in a list of lists
 def findLowestLisOfLis(themainlist):
     least = themainlist[0]
@@ -93,6 +86,7 @@ def findLowestLisOfLis(themainlist):
                 least=themainlist[i+1]
     return(least)
 #Matrix Add Up Function
+# DO NOT USE, WAS MADE WHEN I DID NOT UNDERSTADN THE PROJECT CORRECTLY!
 def matrixFindRowValue(matrix,a,d):
     #print(matrix)
     stored_paths = []
@@ -118,8 +112,23 @@ def matrixFindRowValue(matrix,a,d):
         lowestprice = findLowestLisOfLis(prices_and_rows)
     print("test:",prices_and_rows)
     return(lowestprice)
+# ACTUAL Matrix Add Up function
+# Literally look up from D to A, thats it bro
+def matrixNonStop(matrix,a,d):
+    return(matrix[d][a])
+# Another Matrix Function
+# Leap departures to find resulting cheaper flight, bruteforce it broski!!!
+def matrixOneStop(matrix,a,d):
+    endvalue = 0 + matrix[d][a]
+    listofpossibleprices = []
+    for i in range(len(matrix)):
+        listofpossibleprices.append(matrix[i][a])
+    print(listofpossibleprices)
+    return(findLowestLisOfLis(listofpossibleprices))
+
 
 ### MAIN
 mymatrix = matrixGen(citiesServed, startingCity, endingCity)
-matrixPrint(mymatrix)
-print(matrixFindRowValue(mymatrix,2,2))
+print(matrixPrint(mymatrix))
+print("The airfare for a nonstop oneway flight from city",startingCity,"to city",endingCity,"is:",matrixNonStop(mymatrix,startingCity,endingCity))
+print("test ones stop:",matrixOneStop(mymatrix,2,2))
