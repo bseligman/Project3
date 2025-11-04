@@ -38,8 +38,10 @@ a multi-dimensional data structure; in this case we need a two-dimensional struc
 PriceChooseFrom = [19, 29, 39, 49, 59, 69]
 ## N, Cities Served
 # If not between 3 -> 100, terminates
-citiesServed, startingCity, endingCity = input().split()
-citiesServed, startingCity, endingCity = int(citiesServed), int(startingCity), int(endingCity)
+citiesServed = int(sys.argv[1])
+startingCity = int(sys.argv[2])
+endingCity = int(sys.argv[3])
+
 if(citiesServed < 3) or (citiesServed > 100):
     sys.exit(0)
 ## S, Index of starting City of Customer
@@ -76,16 +78,31 @@ def matrixPrint(matrix):
         for itemstwo in items:
             print(str(itemstwo), end=" ")
         print("\n", end="")
+#Find Lowest of Values in a list of lists
+def findLowestLisOfLis(themainlist):
+    least = themainlist[0]
+    for i in range(len(themainlist)-1):
+        if(themainlist[i]!=0):
+            if(themainlist[i+1] < themainlist[i]):
+                least=themainlist[i+1]
+    return(least)
 #Matrix Add Up Function
 def matrixFindRowValue(matrix,a,d):
+    prices_and_rows = []
     avalue = 0
     for items in matrix:
-        for listitems in items:
-            #print(items.index(listitems))
-            print(a)
-            if(items.index(listitems) == a):
-                avalue+=listitems
-    return(avalue)
+        row=[]
+        #find starting point
+        if matrix.index(items) == a:
+            for itemsofthelist in items:
+                row.append(itemsofthelist)
+        prices_and_rows.append(sum(row))
+        lowestprice = findLowestLisOfLis(prices_and_rows)
+    print("test:",prices_and_rows)
+    return(lowestprice)
+def matrixFindDiagnolRowValue(matrix,a,d):
+    prices_and_rows = []
+    avalue = 0
 
 
 ### MAIN
