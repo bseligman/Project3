@@ -118,10 +118,6 @@ def matrixFindRowValue(matrix,a,d):
         lowestprice = findLowestLisOfLis(prices_and_rows)
     print("test:",prices_and_rows)
     return(lowestprice)
-def matrixFindDiagnolRowValue(matrix,a,d):
-    prices_and_rows = []
-    avalue = 0
-
 
 ### MAIN
 mymatrix = matrixGen(citiesServed, startingCity, endingCity)
