@@ -72,12 +72,18 @@ def matrixPrint(matrix):
         else:
             print("a" + str(i), end=" ")
     print("\n", end="")
-    for items in matrix:
+    for i in range(len(matrix)):
+        for b in range(len(matrix)):
+            print(matrix[b][i],end=",")
+        print("\n")
+
+        '''
         line = str(matrix.index(items))
         print("d" + line, end=" ")
         for itemstwo in items:
             print(str(itemstwo), end=" ")
         print("\n", end="")
+        '''
 #Find Lowest of Values in a list of lists
 def findLowestLisOfLis(themainlist):
     least = themainlist[0]
@@ -88,6 +94,8 @@ def findLowestLisOfLis(themainlist):
     return(least)
 #Matrix Add Up Function
 def matrixFindRowValue(matrix,a,d):
+    #print(matrix)
+    stored_paths = []
     prices_and_rows = []
     avalue = 0
     for items in matrix:
@@ -95,7 +103,17 @@ def matrixFindRowValue(matrix,a,d):
         #find starting point
         if matrix.index(items) == a:
             for itemsofthelist in items:
+                #for locations being stored for carryovers
+                stored_paths.append(items.index(itemsofthelist))
+                #for values themselves, yes I could've used dictionary but I just prfer 2 lists
                 row.append(itemsofthelist)
+                print(print("row:",row))
+                #TESTING GROUNDS
+                #If last listed flight is not the destination city, shift over another flight to that city
+                if(itemsofthelist == items[-0]):
+                    if(itemsofthelist != d):
+                        print((matrix[matrix.index(items)+1][-1]))
+                        row.append(matrix[matrix.index(items)+1][-1])
         prices_and_rows.append(sum(row))
         lowestprice = findLowestLisOfLis(prices_and_rows)
     print("test:",prices_and_rows)
